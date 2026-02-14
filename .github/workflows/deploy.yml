@@ -32,6 +32,9 @@ jobs:
         uses: docker://devatherock/minify-js:latest
         with:
           args: "js -r ."
+      
+      - name: Replace index.html with minified version 
+        run: mv index.min.html index.html
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3

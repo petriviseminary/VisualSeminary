@@ -1,0 +1,36 @@
+name: Minify and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Minify HTML
+        uses: docker://devatherock/minify-js:latest
+        with:
+          args: "html -r ."
+
+      - name: Minify CSS
+        uses: docker://devatherock/minify-js:latest
+        with:
+          args: "css -r ."
+
+      - name: Minify JS
+        uses: docker://devatherock/minify-js:latest
+        with:
+          args: "js -r ."
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: .

@@ -17,16 +17,11 @@ jobs:
       with:
         fetch-depth: 0
 
-    # 1. Create dist folder and copy your site into it
+    # 1. Create dist folder and copy EVERYTHING into it
     - name: Create dist folder
       run: |
         mkdir dist
-        rsync -av \
-          --exclude='dist' \
-          --exclude='.git' \
-          --exclude='.github' \
-          --exclude='node_modules' \
-          ./ dist/
+        cp -r . dist/
 
     # 2. Clean workspace before switching branches
     - name: Clean workspace

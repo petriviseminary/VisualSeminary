@@ -22,13 +22,13 @@ jobs:
       with:
         node-version: 18
 
-    # 1. Create dist folder and copy entire site into it
+    # 1. Create dist folder and copy entire site EXCEPT dist/.git/.github/node_modules
     - name: Copy site into dist
       run: |
         mkdir dist
-        cp -r * dist/
+        rsync -av --exclude='dist' --exclude='.git' --exclude='.github' --exclude='node_modules' ./ dist/
 
-    # 2. Install JS obfuscator (safe even if no JS files exist)
+    # 2. Install JS obfuscator
     - name: Install obfuscator
       run: npm install javascript-obfuscator
 

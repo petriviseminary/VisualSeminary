@@ -4,6 +4,9 @@ on:
   push:
     branches: [ "main" ]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,6 +38,7 @@ jobs:
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
 
+        # Switch to gh-pages branch
         git checkout gh-pages
 
         # Remove everything in gh-pages

@@ -1,0 +1,10 @@
+{
+  "name": "obfuscate-everything",
+  "version": "1.0.0",
+  "devDependencies": {
+    "javascript-obfuscator": "^4.1.0"
+  },
+  "scripts": {
+    "build": "javascript-obfuscator . --output dist --exclude dist --exclude .github --exclude node_modules"
+  }
+}
